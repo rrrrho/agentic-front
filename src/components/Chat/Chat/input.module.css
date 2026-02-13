@@ -1,0 +1,20 @@
+.input {
+    background-color: #150724;
+    border: 1.5px solid #4E1684; 
+    border-radius: 10px;
+    font-size: 1rem;
+    padding: 1.5rem 1rem;
+    color: #B397CF;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+
+    &::placeholder {
+        color: #4E2B71;
+    }
+}
+
+
+.section {
+    background-color: transparent;
+    color: #4E1684;
+    margin-right: 0.5rem;
+}

@@ -1,0 +1,19 @@
+.content {
+    background-color: #0B0016;
+}
+
+.root {
+    background-color: #0B0016;
+}
+
+.body {
+    display: flex;
+    flex-direction: column;
+    margin: 0rem 0.5rem;
+}
+
+.header {
+    background-color: #0B0016;
+    color: #EEDEFF;
+    margin: 0rem 0.5rem;
+}

@@ -1,0 +1,69 @@
+*, *::before {
+  box-sizing: border-box;
+}
+
+.message {
+  color: #000000;
+  max-width: fit-content;
+  padding: 1rem;
+  background: #B397CF;
+  border-radius: 30px;
+  font-size: 1rem;
+  animation: message 0.15s ease-out 0s forwards;
+  overflow: hidden;
+  transform-origin: 0 100%;
+  padding-top: 0;
+  transform: scale(0);
+  max-height: 0;
+
+}
+
+
+.loader {
+  width: 1.5rem;
+  aspect-ratio: 4;
+  --_g: no-repeat radial-gradient(circle closest-side,#4E2B71 90%, transparent);
+  background: 
+    var(--_g) 0%   50%,
+    var(--_g) 50%  50%,
+    var(--_g) 100% 50%;
+  background-size: calc(100%/3) 100%;
+  animation: l7 1s infinite linear;
+}
+@keyframes l7 {
+    33%{background-size:calc(100%/3) 0%  ,calc(100%/3) 100%,calc(100%/3) 100%}
+    50%{background-size:calc(100%/3) 100%,calc(100%/3) 0%  ,calc(100%/3) 100%}
+    66%{background-size:calc(100%/3) 100%,calc(100%/3) 100%,calc(100%/3) 0%  }
+}
+
+.avatar {
+  align-self: flex-end;
+}
+
+@keyframes message {
+  0% {
+    max-height: 100vmax;
+  }
+  80% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+    max-height: 100vmax;
+    overflow: visible;
+    padding-top: 1rem;
+  }
+}
+
+.user {
+    border-bottom-right-radius: 0px;
+
+    
+
+}
+
+.ai {
+    border-bottom-left-radius: 0px;
+    
+
+}
