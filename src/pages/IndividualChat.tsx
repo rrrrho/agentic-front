@@ -8,6 +8,7 @@ import { getHistorial } from "../services/http_req";
 import { useDispatch, useSelector } from "react-redux";
 import type { IRootState } from "../redux/store";
 import { addChat } from "../redux/chatSlice";
+import { AnimatePresence, motion } from "motion/react";
 
 export type AIResponse = {
     response: string;
@@ -59,8 +60,6 @@ const IndividualChat = ({open}: IndividualChatProps) => {
 
     socket.on('response', (data: AIResponse) => {
 
-        setThreadId(data.thread_id)
-
         setMessages((prev) => {
             const id = prev[0]?.id || crypto.randomUUID();
 
@@ -73,10 +72,9 @@ const IndividualChat = ({open}: IndividualChatProps) => {
         })
 
         if (currentChat.threadId === '') {
-            dispatch(addChat({threadId: data.thread_id, title: data.title}))
+            dispatch(addChat({threadId: data.thread_id, title: data.title, isNew: true}))
         }
         
-        console.log(currentChat)    
         setIsStarted(false);
     })
 
@@ -109,8 +107,10 @@ const IndividualChat = ({open}: IndividualChatProps) => {
 
     return (
         <Flex className={classes.chat}>
-            <Header open={open} isLoading={isStarted} title={currentChat.title}/>
+        
+            <Header open={open} isActive={currentChat.threadId !== ''} title={currentChat.title}/>
             <Chat messages={messages} isWriting={isStarted} onSend={handleSubmit}/>
+            
         </Flex>
     )
 };

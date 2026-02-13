@@ -1,11 +1,12 @@
 import { Drawer, Flex, Text } from "@mantine/core";
 import Tab from "./Tab";
 import classes from './drawer.module.css';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addChat } from "../../redux/chatSlice";
 import { useEffect, useState } from "react";
 import { getThreads } from "../../services/http_req";
 import { IconNewSection } from '@tabler/icons-react'
+import type { IRootState } from "../../redux/store";
 
 type DrawerProps = {
     open: () => void,
@@ -16,15 +17,16 @@ type DrawerProps = {
 const CustomDrawer = ({close, opened}: DrawerProps) => {
     const dispatch = useDispatch();
     const [chats, setChats] = useState<[]>([])
+    const isNewChat = useSelector((state: IRootState) => state.chat.isNew);
 
     const handleClick = (threadId: string, title: string) => {
-        dispatch(addChat({threadId: threadId, title: title}))
+        dispatch(addChat({threadId: threadId, title: title, isNew: false}))
 
         close()
     }
 
     const handleNewChat = () => {
-        dispatch(addChat({threadId: '', title: ''}))
+        dispatch(addChat({threadId: '', title: '', isNew: false}))
 
         close()
     }
@@ -41,7 +43,7 @@ const CustomDrawer = ({close, opened}: DrawerProps) => {
         };
 
         fetchChats();
-    }, [])
+    }, [isNewChat])
 
 
     return (
@@ -56,24 +58,9 @@ const CustomDrawer = ({close, opened}: DrawerProps) => {
             </Drawer.Header>
             <Drawer.Body classNames={{ body: classes.body }}>
                 <Drawer.Title c="#EEDEFF" p={'0.8rem 0.5rem'}>Conversations</Drawer.Title>
-                {chats.map((thread, i) => {
-                    if (chats.length > 1) {
-
-                        if (i === chats.length - 1) {
-                            return <Tab onClick={handleClick} thread={thread}/>
-                        }
-
-                        return (
-                            <><Tab onClick={handleClick} thread={thread} /></>
-                        )
-                    }
-
-                    return <Tab onClick={handleClick} thread={thread}/>
-                }
-                
-                
+                {chats.map(thread => 
+                    <Tab onClick={handleClick} thread={thread}/>
                 )}
-
             </Drawer.Body>
             </Drawer.Content>
       </Drawer.Root>

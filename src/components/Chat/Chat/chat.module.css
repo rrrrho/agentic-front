@@ -1,17 +1,13 @@
 .chat {
-    overflow: hidden;
+    display: flex;
     flex-direction: column-reverse;
     padding: 0.8rem;
     width: 100%;
     gap: 2rem;
-    overflow-x: hidden;
     overflow-y: auto;
-    position: relative;
     flex: 1;
-    min-height: 0;
-    padding-bottom: 2rem;
+    padding-bottom: 2rem
 }
-
 
 .chat::-webkit-scrollbar{
     width: 0.5em;
@@ -20,5 +16,4 @@
 .chat::-webkit-scrollbar-thumb{
     background-color: #3b1b63;
     border-radius: 15px;
-
 }

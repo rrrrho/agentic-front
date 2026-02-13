@@ -2,21 +2,24 @@ import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 type Chat = {
     threadId: string,
-    title: string
+    title: string,
+    isNew: boolean
 }
 
 const initialState = {
     threadId: '',
-    title: ''
+    title: '',
+    isNew: false
 };
 
 export const chatSlice = createSlice({
     name: 'chat',
     initialState,
     reducers: { addChat: (state, action: PayloadAction<Chat>) => {
-        const { threadId, title } = action.payload;
+        const { threadId, title, isNew } = action.payload;
         state.threadId = threadId;
         state.title = title;
+        state.isNew = isNew
     } }
 })
 

@@ -3,6 +3,7 @@ import Input from "./Input";
 import type { Message as MessageType } from "../../../pages/IndividualChat";
 import Message from "./Message";
 import { AnimatePresence, motion } from "motion/react";
+import classes from './chat.module.css'
 
 type ChatProps = {
     messages: MessageType[];
@@ -20,7 +21,7 @@ const Chat = ({ messages, isWriting, onSend }: ChatProps) => {
             h='100%' 
             style={{ overflow: 'hidden', position: "relative" }}
         >
-            <Box style={{ flex: 1, position: 'relative', display: 'flex', flexDirection: 'column' }}>
+            <Box style={{ flex: 1, position: 'relative', display: 'flex', flexDirection: 'column', minHeight: 0, overflowY: 'hidden' }}>
                 <AnimatePresence mode='wait'>
                     {isEmpty ? (
                         <Center 
@@ -49,17 +50,8 @@ const Chat = ({ messages, isWriting, onSend }: ChatProps) => {
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                             transition={{ duration: 0.3 }}
-                            style={{ 
-                                display: 'flex',
-                                flexDirection: 'column-reverse',
-                                padding: '0.8rem',
-                                width: '100%',
-                                gap: '2rem',
-                                overflowY: 'auto',
-                                flex: 1,
-                                minHeight: 0,
-                                paddingBottom: '2rem'
-                            }}
+                            
+                            className={classes.chat}
                         >
                             {messages.map(m => (
                                 <Box key={m.id} maw={'75%'} style={m.role === 'USER' ? { alignSelf: 'flex-end' } : { alignSelf: 'flex-start' }}>
@@ -77,7 +69,7 @@ const Chat = ({ messages, isWriting, onSend }: ChatProps) => {
                 style={{ 
                     position: 'relative',
                     zIndex: 2,
-                    height: '80px', // Altura fija para evitar saltos
+                    height: '80px', 
                     display: 'flex',
                     alignItems: 'center'
                 }}
