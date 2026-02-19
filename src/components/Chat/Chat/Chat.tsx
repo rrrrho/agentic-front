@@ -4,6 +4,7 @@ import type { Message as MessageType } from "../../../pages/IndividualChat";
 import Message from "./Message";
 import { AnimatePresence, motion } from "motion/react";
 import classes from './chat.module.css'
+import GradientText from "../../external/GradientText";
 
 type ChatProps = {
     messages: MessageType[];
@@ -39,8 +40,7 @@ const Chat = ({ messages, isWriting, onSend }: ChatProps) => {
                             }}
                         >
                             <Flex direction="column" align="center" gap={2} c={'#EEDEFF'}>
-                                <Text size="xl" fw={500}>¿Por dónde deberíamos empezar?</Text>
-                                <Text size="sm">Escribe tu primer mensaje abajo</Text>
+                                <GradientText>Where should we start?</GradientText>
                             </Flex>
                         </Center>
                     ) : (
@@ -76,7 +76,7 @@ const Chat = ({ messages, isWriting, onSend }: ChatProps) => {
             >
                 <motion.div 
                     animate={{ 
-                        y: isEmpty ? -window.innerHeight / 3 : 0 
+                        y: isEmpty ? -window.innerHeight / 2.3 : 0
                     }}
                     transition={{ 
                         type: "spring", 
@@ -86,12 +86,16 @@ const Chat = ({ messages, isWriting, onSend }: ChatProps) => {
                     }}
                     style={{ 
                         width: '100%',
+                        display: 'flex',
+                        justifyContent: 'center',
                         transformPerspective: 1000,
                         backfaceVisibility: 'hidden',
                         WebkitFontSmoothing: 'subpixel-antialiased'
                     }}
                 >
-                    <Input handleSubmit={onSend}/>
+                    <Box w='80%'>
+                        <Input handleSubmit={onSend}/>
+                    </Box>
                 </motion.div>
             </Box>
         </Flex>

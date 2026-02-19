@@ -25,13 +25,13 @@ const Header = ({open, isActive, title}: HeaderProps) => {
                 >
                     <Flex className={classes.header}>
                         <Flex gap={20} align='center'>
-                        <IconArrowBack color='#5B00B5' size='2.5rem' onClick={() => {open()}}/>
+                        <IconArrowBack color='rgba(184, 111, 252, 0.6)' size='2.5rem' onClick={() => {open()}}/>
                         <Flex direction='column' justify='center'>
                             
                             <Text fz='1.2rem'>{truncText(title)}</Text>
                         </Flex>
                         </Flex>
-                        <IconMenu3 color='#5B00B5' size='2.5rem'/>
+                        <IconMenu3 color='rgba(184, 111, 252, 0.6)' size='2.5rem'/>
                     </Flex>
                 </motion.div>
             ) : ''}

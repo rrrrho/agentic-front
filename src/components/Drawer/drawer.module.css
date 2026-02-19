@@ -17,3 +17,12 @@
     color: #EEDEFF;
     margin: 0rem 0.5rem;
 }
+
+.content::-webkit-scrollbar{
+    width: 0.3em;
+}
+
+.content::-webkit-scrollbar-thumb{
+    background-color: #25103f;
+    border-radius: 15px;
+}

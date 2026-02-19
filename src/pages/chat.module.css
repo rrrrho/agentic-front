@@ -5,6 +5,4 @@
     flex-direction: column;
     justify-content: space-between;
     gap: 1rem;
-    background: #0B0016;
-    background: linear-gradient(145deg, rgba(11, 0, 22, 1) 0%, rgba(26, 0, 50, 1) 100%);
 }

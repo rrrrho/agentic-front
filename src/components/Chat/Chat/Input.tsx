@@ -1,4 +1,4 @@
-import { TextInput } from "@mantine/core";
+import { Box, TextInput } from "@mantine/core";
 import { useState } from "react";
 import classes from './input.module.css'
 import { IconSend2 } from '@tabler/icons-react';
@@ -16,14 +16,16 @@ const Input = ({ handleSubmit }: InputProps) => {
     }
     
     return (
-        <TextInput
-        classNames={{ input: classes.input, section: classes.section }}
-        placeholder='Say something...'
-        value={value}
-        rightSection={<IconSend2 onClick={() => {sendMessage(value)}}/>}
-        onChange={(event) => setValue(event.currentTarget.value)}
-        onKeyDown={(event) => event.key === 'Enter' && sendMessage(value)}
-        />
+        <Box className={classes.gradientBorder}>
+            <TextInput
+            classNames={{ input: classes.input, section: classes.section }}
+            placeholder='Say something...'
+            value={value}
+            rightSection={<IconSend2 onClick={() => {sendMessage(value)}}/>}
+            onChange={(event) => setValue(event.currentTarget.value)}
+            onKeyDown={(event) => event.key === 'Enter' && sendMessage(value)}
+            />
+            </Box>
     )
 };
 

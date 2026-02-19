@@ -1,20 +1,55 @@
 .input {
-    background-color: #150724;
-    border: 1.5px solid #4E1684; 
-    border-radius: 10px;
+    background-color: transparent;
+    border: 1.5px solid transparent; 
+    border-radius: 30px;
     font-size: 1rem;
     padding: 1.5rem 1rem;
-    color: #B397CF;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    color: rgb(142, 61, 224);
 
     &::placeholder {
-        color: #4E2B71;
+        color: rgb(127, 82, 172)
     }
+}
+
+.gradientBorder {
+  /* 1. Necesario para posicionar el pseudo-elemento */
+  position: relative;
+  
+  /* 2. El fondo real es transparente */
+  background: transparent; 
+  
+  /* 3. Radius del contenedor */
+  border-radius: 12px; 
+  
+  /* Opcional: Para asegurar que el texto quede encima */
+  z-index: 0;
+}
+
+.gradientBorder::before {
+  content: "";
+  position: absolute;
+  inset: 0; /* Ocupa todo el espacio del padre */
+  
+  border-radius: 30px; /* Debe coincidir con el padre */
+  padding: 2px; /* GROSOR DEL BORDE AQUÍ */
+  
+  /* TU DEGRADADO */
+  background: linear-gradient(145deg, rgb(75, 26, 124) 0%, rgb(184, 111, 252) 100%);
+  
+  /* LA MAGIA: Recorta el centro para dejarlo transparente */
+  -webkit-mask: 
+     linear-gradient(#fff 0 0) content-box, 
+     linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+          
+  /* Evita que el borde bloquee clicks en el texto */
+  pointer-events: none; 
 }
 
 
 .section {
     background-color: transparent;
-    color: #4E1684;
+    color: rgb(111, 43, 179);
     margin-right: 0.5rem;
 }
