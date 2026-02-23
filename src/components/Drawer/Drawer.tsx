@@ -1,4 +1,4 @@
-import { Drawer, Flex, Text } from "@mantine/core";
+import { Box, Drawer, Flex, Text } from "@mantine/core";
 import Tab from "./Tab";
 import classes from './drawer.module.css';
 import { useDispatch, useSelector } from "react-redux";
@@ -47,8 +47,8 @@ const CustomDrawer = ({close, opened}: DrawerProps) => {
 
 
     return (
-         <Drawer.Root size={'15rem'} opened={opened} onClose={close} classNames={{ root: classes.root }}>
-            <Drawer.Overlay/>
+         <Drawer.Root display={'flex'} size={'15rem'} opened={opened} onClose={close} classNames={{ root: classes.root }}>
+            <Drawer.Overlay ></Drawer.Overlay>
             <Drawer.Content  classNames={{ content: classes.content }}>
             <Drawer.Header classNames={{ header: classes.header }}>
                 <Flex gap={8} p={'0.8rem 0.5rem'} align={'center'} onClick={handleNewChat}>
@@ -57,7 +57,7 @@ const CustomDrawer = ({close, opened}: DrawerProps) => {
                 </Flex>
             </Drawer.Header>
             <Drawer.Body classNames={{ body: classes.body }}>
-                <Drawer.Title c="#EEDEFF" p={'0.8rem 0.5rem'}>Conversations</Drawer.Title>
+                <Drawer.Title c="#dfd4ff" p={'0.8rem 0.5rem'}>Conversations</Drawer.Title>
                 {chats.map(thread => 
                     <Tab onClick={handleClick} thread={thread}/>
                 )}

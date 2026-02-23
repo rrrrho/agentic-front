@@ -1,55 +1,58 @@
 .input {
-    background-color: transparent;
-    border: 1.5px solid transparent; 
-    border-radius: 30px;
-    font-size: 1rem;
-    padding: 1.5rem 1rem;
-    color: rgb(142, 61, 224);
+  background-color: rgba(30, 16, 93, 0.3);
+  border: 1.5px solid transparent; 
+  border-radius: 30px;
+  font-size: 1rem;
+  padding: 1.5rem 1rem;
+  color: #dfd4ff;
+  
 
-    &::placeholder {
-        color: rgb(127, 82, 172)
-    }
+  &::placeholder {
+    color: rgba(49, 28, 121, 0.8)
+  }
 }
 
+/*
 .gradientBorder {
-  /* 1. Necesario para posicionar el pseudo-elemento */
+
   position: relative;
   
-  /* 2. El fondo real es transparente */
+
   background: transparent; 
   
-  /* 3. Radius del contenedor */
+
   border-radius: 12px; 
   
-  /* Opcional: Para asegurar que el texto quede encima */
+
   z-index: 0;
 }
 
 .gradientBorder::before {
   content: "";
   position: absolute;
-  inset: 0; /* Ocupa todo el espacio del padre */
+  inset: 0; 
   
-  border-radius: 30px; /* Debe coincidir con el padre */
-  padding: 2px; /* GROSOR DEL BORDE AQUÍ */
+  border-radius: 30px;
+  padding: 2px; 
   
-  /* TU DEGRADADO */
-  background: linear-gradient(145deg, rgb(75, 26, 124) 0%, rgb(184, 111, 252) 100%);
+
+  background: linear-gradient(145deg, rgb(44, 4, 84) 0%, rgb(48, 0, 171) 100%);
   
-  /* LA MAGIA: Recorta el centro para dejarlo transparente */
+
   -webkit-mask: 
      linear-gradient(#fff 0 0) content-box, 
      linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
           mask-composite: exclude;
           
-  /* Evita que el borde bloquee clicks en el texto */
+
   pointer-events: none; 
 }
 
+*/
 
 .section {
-    background-color: transparent;
-    color: rgb(111, 43, 179);
-    margin-right: 0.5rem;
+  background-color: transparent;
+  color: rgba(49, 28, 121, 0.8);
+  margin-right: 0.5rem;
 }

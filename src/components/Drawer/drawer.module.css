@@ -1,9 +1,9 @@
 .content {
-    background-color: #0B0016;
-}
-
-.root {
-    background-color: #0B0016;
+    background: rgba(0, 0, 0, 0.3);
+    box-shadow: inset 0px 0px 10px 10px transparent;
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    mask-image: linear-gradient(90deg, black 85%, transparent 100%);
 }
 
 .body {
@@ -13,8 +13,8 @@
 }
 
 .header {
-    background-color: #0B0016;
-    color: #EEDEFF;
+    background-color: transparent;
+    color: #dfd4ff;
     margin: 0rem 0.5rem;
 }
 
@@ -23,6 +23,6 @@
 }
 
 .content::-webkit-scrollbar-thumb{
-    background-color: #25103f;
+    background-color: rgba(44, 0, 125, 0.7);
     border-radius: 15px;
 }

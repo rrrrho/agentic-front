@@ -1,11 +1,11 @@
 .tab {
     background-color: transparent;
-    color: #EEDEFF !important;
+    color: #dfd4ff !important;
     height: auto;
     padding: 0.8rem 0.5rem;
     display: flex;
 }
 
 .tab:hover {
-    background-color: #271638;
+    background-color: #170c3f;
 }

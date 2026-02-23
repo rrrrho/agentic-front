@@ -11,7 +11,7 @@ type MessageProps = {
 const Message = ({ role, content, isLoading }: MessageProps) => {
     return (
         <Flex gap={10}>
-            {role.startsWith('AI')  ? <Avatar className={classes.avatar} src={Image}/> : ''}
+            {role.startsWith('AI')  ? '' : ''}
             <Flex className={`${classes.message} ${role === 'USER' ? classes.user : classes.ai}`}>
                 {isLoading && role === 'AI_WRITING' ? <Box className={classes.loader}/> : content}
             </Flex>

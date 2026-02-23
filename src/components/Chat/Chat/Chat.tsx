@@ -14,11 +14,13 @@ type ChatProps = {
 
 const Chat = ({ messages, isWriting, onSend }: ChatProps) => {
     const isEmpty = messages.length === 0;
+    const isDesktop = window.innerWidth >= 1024;
 
     return (
         <Flex 
             direction='column' 
             px='1rem' 
+            pb={isEmpty ? 0 : '3rem'}
             h='100%' 
             style={{ overflow: 'hidden', position: "relative" }}
         >
@@ -28,20 +30,21 @@ const Chat = ({ messages, isWriting, onSend }: ChatProps) => {
                         <Center 
                             key='empty-state'
                             component={motion.div}
-                            initial={{ opacity: 0, y: 20 }}
+                            initial={{ opacity: 0 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -20 }}
                             transition={{ duration: 0.4, ease: "easeInOut" }}
                             style={{ 
                                 position: 'absolute', 
+                                marginBottom: '14vh',
                                 inset: 0, 
                                 zIndex: 1,
                                 opacity: 0.5 
                             }}
                         >
-                            <Flex direction="column" align="center" gap={2} c={'#EEDEFF'}>
-                                <GradientText>Where should we start?</GradientText>
-                            </Flex>
+
+                            <GradientText>Where should we start?</GradientText>
+
                         </Center>
                     ) : (
                         <motion.div
@@ -71,12 +74,14 @@ const Chat = ({ messages, isWriting, onSend }: ChatProps) => {
                     zIndex: 2,
                     height: '80px', 
                     display: 'flex',
-                    alignItems: 'center'
+                    alignItems: 'center',
+                    justifyContent: 'center',
                 }}
             >
                 <motion.div 
                     animate={{ 
-                        y: isEmpty ? -window.innerHeight / 2.3 : 0
+                        y: isEmpty ? -window.innerHeight / 2.3 : 0,
+                        width: isEmpty ? (isDesktop ? '25%' : '80%') : (isDesktop ? '50%' : '100%'),
                     }}
                     transition={{ 
                         type: "spring", 
@@ -93,7 +98,7 @@ const Chat = ({ messages, isWriting, onSend }: ChatProps) => {
                         WebkitFontSmoothing: 'subpixel-antialiased'
                     }}
                 >
-                    <Box w='80%'>
+                    <Box w='100%'>
                         <Input handleSubmit={onSend}/>
                     </Box>
                 </motion.div>
