@@ -88,10 +88,11 @@ const IndividualChat = ({open}: IndividualChatProps) => {
                 }));
             }
 
+            console.log(data)
             setMessages(prev => {
                 const cleanPrev = prev.filter(m => m.role !== 'AI_WRITING');
-                
                 const lastMsg = cleanPrev[0];
+
                 if (lastMsg && lastMsg.role === 'AI' && lastMsg.content === data.response) {
                     return cleanPrev;
                 }

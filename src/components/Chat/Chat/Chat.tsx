@@ -36,7 +36,7 @@ const Chat = ({ messages, isWriting, onSend }: ChatProps) => {
                             transition={{ duration: 0.4, ease: "easeInOut" }}
                             style={{ 
                                 position: 'absolute', 
-                                marginBottom: '14vh',
+                                marginBottom: '15vh',
                                 inset: 0, 
                                 zIndex: 1,
                                 opacity: 0.5 
@@ -74,8 +74,8 @@ const Chat = ({ messages, isWriting, onSend }: ChatProps) => {
                     zIndex: 2,
                     height: '80px', 
                     display: 'flex',
-                    alignItems: 'center',
                     justifyContent: 'center',
+                    alignItems: isEmpty ? 'flex-start' : 'flex-end'
                 }}
             >
                 <motion.div 
@@ -98,7 +98,7 @@ const Chat = ({ messages, isWriting, onSend }: ChatProps) => {
                         WebkitFontSmoothing: 'subpixel-antialiased'
                     }}
                 >
-                    <Box w='100%'>
+                    <Box w='100%' className={isEmpty ? classes.homeInput : classes.conversationInput}>
                         <Input handleSubmit={onSend}/>
                     </Box>
                 </motion.div>

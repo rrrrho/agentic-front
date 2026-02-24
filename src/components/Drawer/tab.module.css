@@ -2,10 +2,22 @@
     background-color: transparent;
     color: #dfd4ff !important;
     height: auto;
+    width: 100%;
     padding: 0.8rem 0.5rem;
     display: flex;
+    justify-content: flex-start;
 }
 
 .tab:hover {
     background-color: #170c3f;
+}
+
+.tabLabel {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    width: 100%;
+    text-align: left;
 }

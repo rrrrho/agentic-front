@@ -3,13 +3,28 @@
   border: 1.5px solid transparent; 
   border-radius: 30px;
   font-size: 1rem;
-  padding: 1.5rem 1rem;
+  padding: 1rem 3rem 1rem 1rem;
   color: #dfd4ff;
   
 
   &::placeholder {
     color: rgba(49, 28, 121, 0.8)
   }
+}
+
+.homeInput {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto; 
+}
+
+.conversationInput {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem; 
+  right: 1rem;
+  z-index: 20;
 }
 
 /*
@@ -55,4 +70,13 @@
   background-color: transparent;
   color: rgba(49, 28, 121, 0.8);
   margin-right: 0.5rem;
+}
+
+.input::-webkit-scrollbar{
+  width: 0.2em;
+}
+
+.input::-webkit-scrollbar-thumb{
+  background-color: #51169e;
+  border-radius: 15px;
 }

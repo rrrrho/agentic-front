@@ -15,10 +15,10 @@
 }
 
 .chat::-webkit-scrollbar{
-    width: 0.5em;
+    width: 0.25em;
 }
 
 .chat::-webkit-scrollbar-thumb{
-    background-color: #3b1b63;
+    background-color: rgba(62, 30, 205, 0.8);
     border-radius: 15px;
 }

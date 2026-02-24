@@ -47,7 +47,7 @@ const CustomDrawer = ({close, opened}: DrawerProps) => {
 
 
     return (
-         <Drawer.Root display={'flex'} size={'15rem'} opened={opened} onClose={close} classNames={{ root: classes.root }}>
+         <Drawer.Root display={'flex'} size={'19rem'} opened={opened} onClose={close} classNames={{ root: classes.root }}>
             <Drawer.Overlay ></Drawer.Overlay>
             <Drawer.Content  classNames={{ content: classes.content }}>
             <Drawer.Header classNames={{ header: classes.header }}>

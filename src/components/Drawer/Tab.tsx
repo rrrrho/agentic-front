@@ -1,6 +1,5 @@
 import { Button } from "@mantine/core";
-import classes from './tab.module.css'
-import { truncText } from "../../utilities/string";
+import classes from './tab.module.css';
 
 type Thread = {
     id: string,
@@ -15,8 +14,8 @@ type TabProps = {
 const Tab = ({thread, onClick}: TabProps) => {
 
     return (
-        <Button className={classes.tab} onClick={() => {onClick(thread.id, thread.title)}}>
-            {truncText(thread.title, 26)}
+        <Button className={classes.tab} classNames={{ label: classes.tabLabel }} onClick={() => {onClick(thread.id, thread.title)}}>
+            {thread.title}
         </Button>
     )
 };

@@ -1,6 +1,6 @@
-import { Avatar, Box, Flex } from "@mantine/core"
+import { Box, Flex } from "@mantine/core"
 import classes from './message.module.css';
-import Image from './../../../assets/avatar.png'
+import ReactMarkdown from "react-markdown";
 
 type MessageProps = {
     role: 'USER' | 'AI' | 'AI_WRITING',
@@ -13,7 +13,11 @@ const Message = ({ role, content, isLoading }: MessageProps) => {
         <Flex gap={10}>
             {role.startsWith('AI')  ? '' : ''}
             <Flex className={`${classes.message} ${role === 'USER' ? classes.user : classes.ai}`}>
-                {isLoading && role === 'AI_WRITING' ? <Box className={classes.loader}/> : content}
+                {isLoading && role === 'AI_WRITING' ? <Box className={classes.loader}/> : 
+                <Flex direction='column' className={classes.markdown}>
+                    <ReactMarkdown>{content}</ReactMarkdown>
+                </Flex>
+                }
             </Flex>
         </Flex>
 
