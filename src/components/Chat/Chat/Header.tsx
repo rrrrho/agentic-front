@@ -3,17 +3,21 @@ import classes from './header.module.css'
 import { IconMenu3, IconArrowBack, IconHistoryToggle } from '@tabler/icons-react'
 import { truncText } from "../../../utilities/string";
 import { AnimatePresence, motion } from "motion/react";
+import BurgerMenu from "./BurgerMenu.tsx";
 
 type HeaderProps = {
     open: () => void,
     isActive: boolean,
-    title: string
+    title: string,
+    handleDelete: () => void
 }
 
-const Header = ({open, isActive, title}: HeaderProps) => {
+const Header = ({open, isActive, title, handleDelete}: HeaderProps) => {
     const isDesktop = window.innerWidth >= 1024;
 
+
     return (
+        <>
 <Flex className={classes.header}>
             <AnimatePresence>
                 {isActive ? (
@@ -53,10 +57,13 @@ const Header = ({open, isActive, title}: HeaderProps) => {
                                 <Text fz='1.2rem'>{isDesktop ? title : truncText(title)}</Text>
                             </Flex>
                         </Flex>
+                        <BurgerMenu handleDelete={handleDelete}>
                         <Box className={classes.iconContainer}>
                             <IconMenu3 className={classes.path} size='2.5rem' strokeWidth='1.5px'/>
                             <IconMenu3 style={{ cursor: 'pointer' }} color='rgba(62, 30, 205, 0.8)' strokeWidth='1.5px' size='2.5rem'/>
+                        
                         </Box>
+                        </BurgerMenu>
                         
                     </motion.div>
                 ) : (
@@ -76,7 +83,10 @@ const Header = ({open, isActive, title}: HeaderProps) => {
                         </motion.div>)
                 }
             </AnimatePresence>
+
         </Flex>
+                
+        </>
         
     )
 };

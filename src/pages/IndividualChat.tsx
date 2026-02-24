@@ -4,10 +4,10 @@ import Chat from "../components/Chat/Chat/Chat"
 import classes from './chat.module.css'
 import { socket } from "../services/socketio";
 import { useEffect, useRef, useState } from "react";
-import { getHistorial } from "../services/http_req";
+import { deleteThread, getHistorial } from "../services/http_req";
 import { useDispatch, useSelector } from "react-redux";
 import type { IRootState } from "../redux/store";
-import { addChat } from "../redux/chatSlice";
+import { addChat, removeChat } from "../redux/chatSlice";
 import Grainient from "../components/external/Grainient";
 
 export type AIResponse = {
@@ -41,6 +41,11 @@ const IndividualChat = ({open}: IndividualChatProps) => {
     const chatRef = useRef(currentChat);
     const prevThreadIdRef = useRef(currentChat.threadId);
     const messagesRef = useRef(messages);
+
+    const handleDelete = async () => {
+        await deleteThread(currentChat.threadId);
+        dispatch(removeChat());
+    }
 
     useEffect(() => { chatRef.current = currentChat; }, [currentChat]);
     useEffect(() => { messagesRef.current = messages; }, [messages]);
@@ -120,7 +125,7 @@ const IndividualChat = ({open}: IndividualChatProps) => {
             };
         };
 
-        const handleError = (data: any) => {
+        const handleError = (data: unknown) => {
             console.error("Socket Error:", data);
             setIsStarted(false);
             setMessages(prev => prev.filter(m => m.role !== 'AI_WRITING'));
@@ -184,7 +189,7 @@ const IndividualChat = ({open}: IndividualChatProps) => {
             zoom={0.9}
         />
         <Flex className={classes.chat}>
-            <Header open={open} isActive={currentChat.threadId !== ''} title={currentChat.title}/>
+            <Header open={open} isActive={currentChat.threadId !== ''} title={currentChat.title} handleDelete={handleDelete}/>
             <Chat messages={messages} isWriting={isStarted} onSend={handleSubmit}/>
         </Flex></>
     )

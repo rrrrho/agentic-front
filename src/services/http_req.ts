@@ -1,10 +1,10 @@
 import axios from "axios";
-import { BASE, GET_HISTORIAL, GET_THREADS } from "./urls";
+import { BASE, GET_HISTORIAL, THREADS } from "./urls";
 
 export const getHistorial = async (threadId: string) => {
     const response = await axios({
         method: 'get',
-        url: `${BASE}${GET_HISTORIAL}/${threadId}`,
+        url: `${BASE}/${GET_HISTORIAL}/${threadId}`,
     });
 
     return [...response.data].reverse();
@@ -13,8 +13,17 @@ export const getHistorial = async (threadId: string) => {
 export const getThreads = async () => {
     const response = await axios({
         method: 'get',
-        url: `${BASE}${GET_THREADS}`,
+        url: `${BASE}/${THREADS}`,
     });
 
     return response.data;
+}
+
+export const deleteThread = async (threadId: string) => {
+    const response = await axios({
+        method: 'delete',
+        url: `${BASE}/${THREADS}/${threadId}`,
+    });
+
+    return response;
 }

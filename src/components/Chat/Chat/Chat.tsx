@@ -1,4 +1,4 @@
-import { Box, Center, Flex, Text } from "@mantine/core";
+import { Box, Center, Flex } from "@mantine/core";
 import Input from "./Input";
 import type { Message as MessageType } from "../../../pages/IndividualChat";
 import Message from "./Message";

@@ -1,4 +1,4 @@
-import { Box, Textarea } from "@mantine/core";
+import { Textarea } from "@mantine/core";
 import { useState } from "react";
 import classes from './input.module.css'
 import { IconSend2 } from '@tabler/icons-react';
