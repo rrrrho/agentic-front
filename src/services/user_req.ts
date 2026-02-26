@@ -1,16 +1,20 @@
-import axios from "axios";
-import { BASE, USERS } from "./urls";
+import { USERS } from "./urls";
+import { api } from "./axios_config";
 
-type User = {
+export type User = {
     name: string,
     email: string,
     password: string
 }
 
+type Token = {
+    access_token: string,
+}
+
 export const postUser = async (user: User) => {
-    const response = await axios({
+    const response: Token = await api({
         method: 'post',
-        url: `${BASE}/${USERS}`,
+        url: `/${USERS}`,
         data: user
     });
 

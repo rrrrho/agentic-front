@@ -1,13 +1,22 @@
-import { Box, Button, Fieldset, PasswordInput, Text, TextInput } from "@mantine/core";
+import {  Button, Fieldset, TextInput } from "@mantine/core";
 import { useState } from "react";
 import classes from './form.module.css'
-import { IconCheck, IconX } from "@tabler/icons-react";
 import Password from "./Password";
+import type { User } from "../../services/user_req";
 
-const Form = () => {
+type FormProps = {
+    onSubmit: (user: User) => void
+}
+
+const Form = ({ onSubmit }: FormProps) => {
     const [email, setEmail] = useState('');
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        onSubmit({ email, name, password });
+    }
 
     return (
         <Fieldset className={classes.fieldset}>
@@ -20,7 +29,7 @@ const Form = () => {
             onChange={(event) => setEmail(event.currentTarget.value)}
             />
             <Password handleValue={setPassword}/>
-            <Button>Sign in</Button>
+            <Button onClick={handleSubmit}>Sign in</Button>
         </Fieldset>
     )
 }

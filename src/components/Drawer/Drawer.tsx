@@ -1,4 +1,4 @@
-import { Box, Drawer, Flex, Text } from "@mantine/core";
+import { Drawer, Flex, Text } from "@mantine/core";
 import Tab from "./Tab";
 import classes from './drawer.module.css';
 import { useDispatch, useSelector } from "react-redux";
