@@ -2,7 +2,7 @@ import { Button } from "@mantine/core";
 import classes from './tab.module.css';
 
 type Thread = {
-    id: string,
+    _id: string,
     title: string
 }
 
@@ -14,7 +14,7 @@ type TabProps = {
 const Tab = ({thread, onClick}: TabProps) => {
 
     return (
-        <Button className={classes.tab} classNames={{ label: classes.tabLabel }} onClick={() => {onClick(thread.id, thread.title)}}>
+        <Button className={classes.tab} classNames={{ label: classes.tabLabel }} onClick={() => {onClick(thread._id, thread.title)}}>
             {thread.title}
         </Button>
     )

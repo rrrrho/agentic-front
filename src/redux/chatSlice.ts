@@ -2,14 +2,13 @@ import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 type Chat = {
     threadId: string,
-    title: string,
-    isNew: boolean
+    title: string
 }
 
 const initialState = {
     threadId: '',
     title: '',
-    isNew: false
+    refreshTrigger: 0
 };
 
 export const chatSlice = createSlice({
@@ -17,18 +16,20 @@ export const chatSlice = createSlice({
     initialState,
     reducers: { 
         addChat: (state, action: PayloadAction<Chat>) => {
-            const { threadId, title, isNew } = action.payload;
+            const { threadId, title } = action.payload;
             state.threadId = threadId;
             state.title = title;
-            state.isNew = isNew
+    },
+        triggerRefresh: (state) => {
+            state.refreshTrigger += 1; 
     },
         removeChat: (state) => {
             state.threadId = '';
             state.title = '';
-            state.isNew = !state.isNew;
+            state.refreshTrigger += 1;
         }
     }
 })
 
-export const { addChat, removeChat } = chatSlice.actions;
+export const { addChat, removeChat, triggerRefresh } = chatSlice.actions;
 export default chatSlice.reducer;

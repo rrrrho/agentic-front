@@ -1,4 +1,4 @@
-import { Flex } from "@mantine/core"
+import { Box, Flex, Loader } from "@mantine/core"
 import Header from "../components/Chat/Chat/Header"
 import Chat from "../components/Chat/Chat/Chat"
 import classes from './chat.module.css'
@@ -7,8 +7,7 @@ import { useEffect, useRef, useState } from "react";
 import { deleteThread, getHistorial } from "../services/http_req";
 import { useDispatch, useSelector } from "react-redux";
 import type { IRootState } from "../redux/store";
-import { addChat, removeChat } from "../redux/chatSlice";
-import Grainient from "../components/external/Grainient";
+import { addChat, removeChat, triggerRefresh } from "../redux/chatSlice";
 
 export type AIResponse = {
     response: string;
@@ -34,8 +33,11 @@ type IndividualChatProps = {
 const IndividualChat = ({open}: IndividualChatProps) => {
     const [messages, setMessages] = useState<Message[]>([]);
     const [isStarted, setIsStarted] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
     const dispatch = useDispatch();
     
+    const user = useSelector((state: IRootState) => state.user);
+
     const currentChat = useSelector((state: IRootState) => state.chat);
     
     const chatRef = useRef(currentChat);
@@ -60,7 +62,7 @@ const IndividualChat = ({open}: IndividualChatProps) => {
             const isJustCreated = previousId === '' && currentId !== '' && hasMessagesLocally;
 
             if (isJustCreated) {
-                console.log("Chat recién creado: Evitando fetch para no borrar mensajes locales.");
+                console.log('chat just created');
             } 
             else if (currentId !== '' && currentId !== previousId) {
                 try {
@@ -82,18 +84,19 @@ const IndividualChat = ({open}: IndividualChatProps) => {
 
 
     useEffect(() => {
+        setIsLoading(true)
         const handleResponse = (data: AIResponse) => {
             const currentThreadId = chatRef.current.threadId;
+            console.log(data)
 
             if (currentThreadId === '' && data.thread_id) {
                 dispatch(addChat({
                     threadId: data.thread_id, 
                     title: data.title, 
-                    isNew: true
                 }));
+                dispatch(triggerRefresh());
             }
 
-            console.log(data)
             setMessages(prev => {
                 const cleanPrev = prev.filter(m => m.role !== 'AI_WRITING');
                 const lastMsg = cleanPrev[0];
@@ -126,7 +129,6 @@ const IndividualChat = ({open}: IndividualChatProps) => {
         };
 
         const handleError = (data: unknown) => {
-            console.error("Socket Error:", data);
             setIsStarted(false);
             setMessages(prev => prev.filter(m => m.role !== 'AI_WRITING'));
         }
@@ -134,6 +136,8 @@ const IndividualChat = ({open}: IndividualChatProps) => {
         socket.on('response', handleResponse);
         socket.on('status', handleStatus);
         socket.on('error', handleError);
+
+        setIsLoading(false)
 
         return () => {
             socket.off('response', handleResponse);
@@ -159,35 +163,9 @@ const IndividualChat = ({open}: IndividualChatProps) => {
         socket.emit('chat', payload);
     }
 
-    console.log(chatRef)
-
     return (
         <>
-         <Grainient
-         
-            color1="#0b0016"
-            color2="#1a0032"
-            color3="#561382"
-            timeSpeed={0.25}
-            colorBalance={0}
-            warpStrength={1}
-            warpFrequency={5}
-            warpSpeed={2}
-            warpAmplitude={50}
-            blendAngle={0}
-            blendSoftness={0.05}
-            rotationAmount={500}
-            noiseScale={2}
-            grainAmount={0.1}
-            grainScale={2}
-            grainAnimated={false}
-            contrast={1.5}
-            gamma={1}
-            saturation={1}
-            centerX={0}
-            centerY={0}
-            zoom={0.9}
-        />
+        {isLoading ? (<Box className={classes.loadingContainer}><Loader/></Box> ) : ''}
         <Flex className={classes.chat}>
             <Header open={open} isActive={currentChat.threadId !== ''} title={currentChat.title} handleDelete={handleDelete}/>
             <Chat messages={messages} isWriting={isStarted} onSend={handleSubmit}/>

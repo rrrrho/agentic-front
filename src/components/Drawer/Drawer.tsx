@@ -2,7 +2,7 @@ import { Drawer, Flex, Text } from "@mantine/core";
 import Tab from "./Tab";
 import classes from './drawer.module.css';
 import { useDispatch, useSelector } from "react-redux";
-import { addChat } from "../../redux/chatSlice";
+import { addChat, triggerRefresh } from "../../redux/chatSlice";
 import { useEffect, useState } from "react";
 import { getThreads } from "../../services/http_req";
 import { IconNewSection } from '@tabler/icons-react'
@@ -17,16 +17,16 @@ type DrawerProps = {
 const CustomDrawer = ({close, opened}: DrawerProps) => {
     const dispatch = useDispatch();
     const [chats, setChats] = useState<[]>([])
-    const isNewChat = useSelector((state: IRootState) => state.chat.isNew);
+    const refreshTrigger = useSelector((state: IRootState) => state.chat.refreshTrigger);
 
     const handleClick = (threadId: string, title: string) => {
-        dispatch(addChat({threadId: threadId, title: title, isNew: false}))
+        dispatch(addChat({threadId: threadId, title: title }))
 
         close()
     }
 
     const handleNewChat = () => {
-        dispatch(addChat({threadId: '', title: '', isNew: false}))
+        dispatch(addChat({threadId: '', title: ''}))
 
         close()
     }
@@ -43,7 +43,7 @@ const CustomDrawer = ({close, opened}: DrawerProps) => {
         };
 
         fetchChats();
-    }, [isNewChat])
+    }, [refreshTrigger])
 
 
     return (

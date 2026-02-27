@@ -1,11 +1,12 @@
 import { Box, PasswordInput, Popover, Progress, Text } from "@mantine/core";
 import { IconCheck, IconX } from "@tabler/icons-react";
 import { useState } from "react";
+import classes from './form.module.css'
 
 const PasswordRequirement = ({ meets, label }: { meets: boolean; label: string }) => {
     return (
         <Text
-        c={meets ? 'teal' : 'red'}
+        c={meets ? '#412498' : '#27155f'}
         style={{ display: 'flex', alignItems: 'center' }}
         mt={7}
         size="sm"
@@ -47,25 +48,25 @@ const Password = ({ handleValue }: PasswordProps) => {
     ));
 
     const strength = getStrength(value);
-    const color = strength === 100 ? 'teal' : strength > 50 ? 'yellow' : 'red';
+    const color ='#29185a';
 
     return (
-        <Popover opened={popoverOpened} position="bottom" width="target" transitionProps={{ transition: 'pop' }}>
+        <Popover withArrow opened={popoverOpened} position="left" width="target" transitionProps={{ transition: 'pop' }}>
             <Popover.Target>
                 <div
                 onFocusCapture={() => setPopoverOpened(true)}
                 onBlurCapture={() => setPopoverOpened(false)}
                 >
                 <PasswordInput
+                    classNames={{ input: classes.input, required: classes.required, visibilityToggle: classes.visibilityToggle }}
                     withAsterisk
                     label="Your password"
-                    placeholder="Your password"
                     value={value}
                     onChange={(event) => {handleValue(event.currentTarget.value); setValue(event.currentTarget.value)}}
                 />
                 </div>
             </Popover.Target>
-            <Popover.Dropdown>
+            <Popover.Dropdown classNames={{ dropdown: classes.dropdown }}>
                 <Progress color={color} value={strength} size={5} mb="xs" />
                 <PasswordRequirement label="Includes at least 6 characters" meets={value.length > 5} />
                 {checks}

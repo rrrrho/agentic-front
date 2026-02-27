@@ -1,4 +1,6 @@
 export const BASE = 'http://localhost:8000'
 export const GET_HISTORIAL = 'chat/history'
 export const THREADS = 'chat/threads'
-export const USERS = 'users'
+export const USERS = 'user'
+export const GET_TOKEN = 'token'
+export const GET_USER_PROFILE = 'user/profile'

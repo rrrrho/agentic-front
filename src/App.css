@@ -9,4 +9,11 @@
   box-sizing: border-box;
 }
 
+.m_f2d85dd2 mantine-PasswordInput-innerInput {
+  color: rgba(153, 146, 255, 0.3)
+}
+
+#mantine-tgsv0if8f::placeholder {
+  color: rgba(153, 146, 255, 0.3)
+}
 
